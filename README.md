@@ -1,10 +1,12 @@
-# Leetcode
+# LeetCode
 
 
 ```
 . 
 ├── Easy
-│   └── Binary\ Tree.md
+│   └── DFS.md
+├── Medium
+├── Hard
 ├── LICENSE
 └── README.m
 ``` 

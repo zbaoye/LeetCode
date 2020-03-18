@@ -5,11 +5,11 @@ Given a sorted array nums, remove the duplicates in-place such that each element
 
 Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.  
 ### Example
+```
 Given nums = [1,1,2],
-
 Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively.
-
 It doesn't matter what you leave beyond the returned length.
+```
 
 ### Code
 ```c++
@@ -36,9 +36,11 @@ Design an algorithm to find the maximum profit. You may complete as many transac
 *Note: You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).*  
 
 ### Example
+```
 Input: [7,1,5,3,6,4]  
 Output: 7  
 Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4. Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.
+``
 
 ### Code
 ```c++
@@ -54,3 +56,48 @@ int maxProfit(vector<int>& prices) {
 ```
 
 ## 3. Rotate Array
+Given an array, rotate the array to the right by k steps, where k is non-negative.
+
+### Example
+```
+Input: [1,2,3,4,5,6,7] and k = 3
+Output: [5,6,7,1,2,3,4]
+Explanation:
+rotate 1 steps to the right: [7,1,2,3,4,5,6]
+rotate 2 steps to the right: [6,7,1,2,3,4,5]
+rotate 3 steps to the right: [5,6,7,1,2,3,4]
+```
+
+### Code
+```c++
+void rotate(vector<int>& nums, int k) {
+    k = k%nums.size();
+    reverse(nums.begin(), nums.end());
+    reverse(nums.begin(), nums.begin()+k);
+    reverse(nums.begin()+k, nums.end());
+}
+```
+
+## 4. Contains Duplicate
+Given an array of integers, find if the array contains any duplicates.  
+Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct.  
+
+### Example
+```
+Input: [1,1,1,3,3,4,3,2,4,2]
+Output: true
+```
+
+### Code
+```c++
+bool containsDuplicate(vector<int>& nums) {
+    if(nums.size()<2) return false;
+    sort(nums.begin(), nums.end());
+    for(int i = 1; i<nums.size(); i++){
+        if(nums[i] == nums[i-1]){
+            return true;
+        }
+    }
+    return false;
+}
+```

@@ -101,3 +101,51 @@ bool containsDuplicate(vector<int>& nums) {
     return false;
 }
 ```
+
+## 5. Single Number
+Given a non-empty array of integers, every element appears twice except for one. Find that single one.  
+*Note: Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?*
+
+### Example
+```
+Input: [4,1,2,1,2]
+Output: 4
+```
+***Hit: XOR***
+
+### Code
+```c++
+int singleNumber(vector<int>& nums) {
+    if(nums.empty()) return 0;
+    sort(nums.begin(), nums.end());
+    int sum = nums[0];
+    for (int i =1; i<nums.size(); i++){
+        if(nums[i-1] == nums[i]){
+            sum -= nums[i];
+        }else{
+            sum += nums[i];
+        }
+    }
+    return sum;
+}
+```
+
+## 6. Intersection of Two Arrays II
+Given two arrays, write a function to compute their intersection.
+### Example
+```
+Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+Output: [4,9]
+```
+### Code
+```c++
+vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
+    map<int,int> numMap;
+    vector<int> result;
+    for(int s:nums1) numMap[s]++;
+    for(int s:nums2){
+        if( numMap[s]-- >0) result.push_back(s);
+    }
+    return result;
+}
+```

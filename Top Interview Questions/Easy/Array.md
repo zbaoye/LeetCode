@@ -149,3 +149,55 @@ vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
     return result;
 }
 ```
+
+## 7. Plus One
+Given a non-empty array of digits representing a non-negative integer, plus one to the integer.  
+The digits are stored such that the most significant digit is at the head of the list, and each element in the array contain a single digit.  
+You may assume the integer does not contain any leading zero, except the number 0 itself.
+
+### Example
+```
+Input: [1,2,3]
+Output: [1,2,4]
+Explanation: The array represents the integer 123.
+```
+
+### Code
+```c++
+vector<int> plusOne(vector<int>& digits) {
+    if(digits.empty()) return digits;
+    int carry = 1;
+    for(int i=digits.size()-1; i>=0; i--){
+        int sum = carry+digits[i];
+        carry = sum/10;
+        digits[i] = sum%10;
+    }
+    if(carry == 1){
+        digits.insert(digits.begin(), carry);
+    }
+    return digits;
+}
+```
+
+## 8. Move Zeroes
+Given an array *nums*, write a function to move all *0*'s to the end of it while maintaining the relative order of the non-zero elements.
+### Example
+```
+Input: [0,1,0,3,12]
+Output: [1,3,12,0,0]
+```
+### Code
+```c++
+void moveZeroes(vector<int>& nums) {
+    int lastNoZeroIndex = 0;
+    for(int i=0; i<nums.size(); i++){
+        if(nums[i]!=0){
+            nums[lastNoZeroIndex++] = nums[i];
+        }
+    }
+    for(int i=lastNoZeroIndex; i<nums.size(); i++){
+        nums[i] = 0;
+    }
+}
+```
+

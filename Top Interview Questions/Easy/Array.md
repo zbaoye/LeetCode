@@ -201,3 +201,105 @@ void moveZeroes(vector<int>& nums) {
 }
 ```
 
+## 9. Two Sum
+Given an array of integers, return indices of the two numbers such that they add up to a specific target.  
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+### Example
+```
+Given nums = [2, 7, 11, 15], target = 9,  
+Because nums[0] + nums[1] = 2 + 7 = 9,  
+return [0, 1].
+```
+### Code
+```c++
+vector<int> twoSum(vector<int>& nums, int target) {
+    int vectorSize = nums.size();
+    map<int, int> numsMap;
+    for (int i = 0; i<vectorSize; i++){
+        int res = target - nums[i];
+        if(numsMap.count(res)){
+            return {numsMap[res], i};
+        }else{
+            numsMap[nums[i]]=i;
+        }
+    }
+    return {0,0};
+}
+```
+
+## 10. Valid Sudoku
+Determine if a 9x9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:  
+Each row must contain the digits 1-9 without repetition.  
+Each column must contain the digits 1-9 without repetition.  
+Each of the 9 3x3 sub-boxes of the grid must contain the digits 1-9 without repetition.
+### Example
+```
+Input:
+[
+  ["5","3",".",".","7",".",".",".","."],
+  ["6",".",".","1","9","5",".",".","."],
+  [".","9","8",".",".",".",".","6","."],
+  ["8",".",".",".","6",".",".",".","3"],
+  ["4",".",".","8",".","3",".",".","1"],
+  ["7",".",".",".","2",".",".",".","6"],
+  [".","6",".",".",".",".","2","8","."],
+  [".",".",".","4","1","9",".",".","5"],
+  [".",".",".",".","8",".",".","7","9"]
+]
+Output: true
+```
+### Code
+```c++
+bool isValidSudoku(vector<vector<char>>& board) {
+    bool rows[9][9] = {false};
+    bool cols[9][9] = {false};
+    bool boxes[9][9] = {false};
+    
+    for(int i=0; i<9; i++){
+        for(int j=0; j<9; j++){
+            if(board[i][j] == '.') continue;
+            int val = board[i][j] - '1';
+            int boxesIndex = (i/3)*3+(j/3);
+            if(rows[i][val] || cols[j][val] || boxes[boxesIndex][val]){
+                return false;
+            }else{
+                rows[i][val] = cols[j][val] = boxes[boxesIndex][val] = true;
+            }
+        }
+    }
+    return true;
+}
+```
+
+## 11. Rotate Image
+You are given an n x n 2D matrix representing an image.  
+Rotate the image by 90 degrees (clockwise).
+*Note: You have to rotate the image in-place, which means you have to modify the input 2D matrix directly. DO NOT allocate another 2D matrix and do the rotation.*
+### Example
+```
+Given input matrix = 
+[
+  [1,2,3],
+  [4,5,6],
+  [7,8,9]
+],
+
+rotate the input matrix in-place such that it becomes:
+[
+  [7,4,1],
+  [8,5,2],
+  [9,6,3]
+]
+```
+### Code
+```c++
+void rotate(vector<vector<int>>& matrix) {
+    int n = matrix.size();
+    for (int i=0; i<n; i++){
+        for (int j=i; j<n; j++){
+            swap(matrix[i][j],matrix[j][i]);
+        }
+        reverse(matrix[i].begin(), matrix[i].end());
+    }
+}
+```

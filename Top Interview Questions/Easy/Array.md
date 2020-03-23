@@ -325,3 +325,54 @@ int reverse(int x) {
     return result;
 }
 ```
+
+## 13. First Unique Character in a String
+Given a string, find the first non-repeating character in it and return it's index. If it doesn't exist, return -1.
+### Example
+```
+s = "leetcode"
+return 0.
+
+s = "loveleetcode",
+return 2.
+```
+### Code
+```c++
+int firstUniqChar(string s) {
+    int list[26] = {};
+    
+    for(int i =0; i<s.size(); i++){
+        list[s[i] - 'a']++;
+    }
+    for(int i =0; i<s.size(); i++){
+        if(list[s[i]-'a'] == 1){
+            return i;
+        }
+    }
+    return -1;
+}
+```
+
+## 14. Valid Anagram
+Given two strings s and t , write a function to determine if t is an anagram of s.
+### Example
+```
+Input: s = "anagram", t = "nagaram"
+Output: true
+```
+### Code
+```c++
+bool isAnagram(string s, string t) {
+    int list[26] = {0};
+    for(auto c:s){
+        list[c-'a']++;
+    }
+    for(auto c:t){
+        list[c-'a']--;
+    }
+    for(auto i:list)
+        if(i != 0)
+            return false;
+    return true;
+}
+```

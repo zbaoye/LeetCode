@@ -114,3 +114,27 @@ int myAtoi(string str) {
     return result;
 }
 ```
+
+## 5. Implement strStr()
+Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+### Example 
+```
+Input: haystack = "hello", needle = "ll"
+Output: 2
+```
+### Code
+```c++
+int strStr(string haystack, string needle) {
+    if(needle.empty()) return 0;
+    int stackSize = haystack.size();
+    int needleSize = needle.size();
+    for(int i=0; i<stackSize-needleSize+1; i++){
+        int j=0;
+        for(; j<needleSize; j++){
+            if(haystack[i+j] != needle[j]) break;
+        }
+        if(j == needleSize) return i;
+    }
+    return -1;
+}
+```

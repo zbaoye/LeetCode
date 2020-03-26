@@ -138,3 +138,76 @@ int strStr(string haystack, string needle) {
     return -1;
 }
 ```
+
+## 6. Count and Say
+The count-and-say sequence is the sequence of integers with the first five terms as following:
+### Example
+```
+1.     1
+2.     11
+3.     21
+4.     1211
+5.     111221
+```
+### Code
+```c++
+string parse(string input){
+    string result="";
+    char pre_char = input[0];
+    int count = 0;
+    for (int i=0; i<input.size(); i++){
+        if( input[i] == pre_char){
+            count++;
+        }else{
+            result.push_back(count+'0');
+            result.push_back(pre_char);
+            pre_char = input[i];
+            count=1;
+        }
+    }
+    result.push_back(count+'0');
+    result.push_back(pre_char);
+    return result;
+}
+string countAndSay(int n) {
+    if(n == 1) return "1";
+    string pre = countAndSay(n-1);
+    return parse(pre);
+}
+```
+
+## 7. Longest Common Prefix
+Write a function to find the longest common prefix string amongst an array of strings.  
+If there is no common prefix, return an empty string "".
+### Example
+```
+Input: ["flower","flow","flight"]
+Output: "fl"
+```
+### Code
+```c++
+string getComm(string s1, string s2){
+    int size = (s1.size()>s2.size())?s2.size():s1.size();
+    string result = "";
+    for (int i=0; i<size; i++){
+        if(s1[i] == s2[i]){
+            result.push_back(s1[i]);
+        }else{
+            return result;
+        }
+    }
+    return result;
+}
+string longestCommonPrefix(vector<string>& strs) {
+    if(strs.empty()) return "";
+    int size = strs.size();
+    string common = strs[0];
+    for (int i=1; i<size; i++){
+        common = getComm(common,strs[i]);
+        if(common == ""){
+            return "";
+        }
+    }
+    return common;
+}
+```

@@ -2,12 +2,16 @@
 
 
 ```
-. 
-├── Easy
-│   └── DFS.md
-├── Medium
-├── Hard
+.
 ├── LICENSE
-└── README.m
-``` 
-
+├── README.md
+└── Top Interview Questions
+    ├── Easy
+    │   ├── Array.md
+    │   ├── LinkedList.md
+    │   ├── README.md
+    │   └── Strings.md
+    ├── Hard
+    ├── Medium
+    └── README.md
+```

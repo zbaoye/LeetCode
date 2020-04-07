@@ -1,17 +1,8 @@
 # LeetCode
 
 
-```
-.
-├── LICENSE
-├── README.md
-└── Top Interview Questions
-    ├── Easy
-    │   ├── Array.md
-    │   ├── LinkedList.md
-    │   ├── README.md
-    │   └── Strings.md
-    ├── Hard
-    ├── Medium
-    └── README.md
-```
+## Top Interview Questions
+This is LeetCode's official curated list of Top classic interview questions to help you land your dream job.
+* [Easy Collection](./Top\ Interview\ Questions/EasyCollection.md)
+* Medium Collection
+* Hard Collection

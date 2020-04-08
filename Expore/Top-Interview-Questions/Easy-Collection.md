@@ -957,3 +957,34 @@ int hammingDistance(int x, int y) {
     return dis;
 }
 ```
+
+## Pascal's Triangle
+Given a non-negative integer numRows, generate the first numRows of Pascal's triangle.
+### Example
+```
+Input: 5
+Output:
+[
+     [1],
+    [1,1],
+   [1,2,1],
+  [1,3,3,1],
+ [1,4,6,4,1]
+]
+```
+### Code
+```cpp
+    vector<vector<int>> generate(int numRows) {    
+        vector<vector<int>> Pascal(numRows);
+        for (int i = 0; i<numRows;i++){
+            Pascal[i].push_back(1);
+            for(int j=0; j<i-1; j++){
+                Pascal[i].push_back(Pascal[i-1][j] + Pascal[i-1][j+1]);
+            }
+            if(i != 0){
+                Pascal[i].push_back(1);
+            }
+        }
+        return Pascal;
+    }
+```

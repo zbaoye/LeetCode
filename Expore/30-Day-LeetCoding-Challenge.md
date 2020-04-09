@@ -88,3 +88,31 @@ ListNode* middleNode(ListNode* head) {
     return slow;
 }
 ```
+
+## Backspace String Compare
+Given two strings `S` and `T`, return if they are equal when both are typed into empty text editors. `#` means a backspace character.
+### Example
+```
+Input: S = "a##c", T = "#a#c"
+Output: true
+Explanation: Both S and T become "c".
+```
+### Code
+```cpp
+bool backspaceCompare(string S, string T) {
+    int i = S.size()-1;
+    int j = T.size()-1;
+    int count1=0; int count2=0;
+    while(i>=0 || j>=0){
+        while(i>=0 && (S[i]=='#' || count1>0)){
+            (S[i--] == '#')?count1++:count1--;
+        }
+        while(j>=0 && (T[j]=='#' || count2>0)){
+            (T[j--] == '#')?count2++:count2--;
+        }
+        if(i<0 || j<0) return i==j;
+        if(S[i--]!=T[j--]) return false;
+    }
+    return i==j;
+}
+```

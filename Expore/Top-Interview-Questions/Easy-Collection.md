@@ -988,3 +988,18 @@ Output:
         return Pascal;
     }
 ```
+
+## Missing Number
+Given an array containing n distinct numbers taken from `0, 1, 2, ..., n`, find the one that is missing from the array.
+### Example
+```
+Input: [9,6,4,2,3,5,7,0,1]
+Output: 8
+```
+### Code
+```cpp
+    int missingNumber(vector<int>& nums) {
+        int size = nums.size();
+        return size*(size+1)/2 - accumulate(nums.cbegin(),nums.cend(),0);
+    }
+```

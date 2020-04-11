@@ -116,3 +116,33 @@ bool backspaceCompare(string S, string T) {
     return i==j;
 }
 ```
+
+## Diameter of Binary Tree
+Given a binary tree, you need to compute the length of the diameter of the tree. The diameter of a binary tree is the length of the longest path between any two nodes in a tree. This path may or may not pass through the root.
+### Example
+```
+          1
+         / \
+        2   3
+       / \     
+      4   5    
+Return 3, which is the length of the path [4,2,1,3] or [5,2,1,3].
+```
+### Code
+```cpp
+unordered_map<TreeNode*,int> m;
+int diameterOfBinaryTree(TreeNode* root) {
+    if(root == NULL) return 0;
+    int way1 = maxDepth(root->left)+maxDepth(root->right);
+    int way2 = diameterOfBinaryTree(root->left);
+    int way3 = diameterOfBinaryTree(root->right);
+    return max(way1,max(way2,way3));
+}
+int maxDepth(TreeNode* root){
+    if(root==NULL) return 0;
+    if(m.count(root) == 1) return m[root];
+    int h = max(maxDepth(root->left),maxDepth(root->right))+1;
+    m[root] = h;
+    return h;
+}
+```

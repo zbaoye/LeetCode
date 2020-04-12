@@ -91,3 +91,31 @@ void setZeroes(vector<vector<int>>& matrix) {
     }
 }
 ```
+
+## Longest Substring Without Repeating Characters
+Given a string, find the length of the longest substring without repeating characters.
+### Example
+```
+Input: "pwwkew"
+Output: 3
+Explanation: The answer is "wke", with the length of 3. 
+             Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
+```
+### Code
+```cpp
+int lengthOfLongestSubstring(string s) {
+    int i=0,j=0,ans=0;
+    int n =s.size();
+    int maxLen = 0;
+    unordered_set<char> char_set;
+    while(i<n && j<n){
+        if(!char_set.count(s[j])){
+            char_set.insert(s[j++]);
+            maxLen = max(maxLen, j-i);
+        }else{
+            char_set.erase(char_set.find(s[i++]));
+        }
+    }
+    return maxLen;
+}
+```

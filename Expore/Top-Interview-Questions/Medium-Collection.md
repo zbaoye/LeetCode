@@ -119,3 +119,44 @@ int lengthOfLongestSubstring(string s) {
     return maxLen;
 }
 ```
+
+##
+### Example
+
+### Code
+Star
+#### Solution One
+*Dynamic Programming*
+```cpp
+string longestPalindrome(string s) {
+    int len = s.size();
+    vector<vector<bool> > dp(len,vector<bool>(len,false));
+    int max = 0;
+    int left = 0;
+    string result = s.substr(0,1);
+    
+    for (int i = 0; i<len; i++){
+        dp[i][i] = true;
+    }
+    for (int i =0; i<len-1; i++){
+        dp[i][i+1]  = s[i]==s[i+1];
+        if(dp[i][i+1] == true){
+            result = s.substr(i,2);
+        }
+    }
+    for (int k=3; k<=len; k++){
+        for(int i =0; i<=len-k; i++){
+            int j = i+k-1;
+            dp[i][j] = dp[i+1][j-1] && s[i]==s[j];
+            if(dp[i][j] && (j-i+1)>result.size()){
+                result = s.substr(i,k);
+            }
+        }
+    }
+    return result;
+}
+```
+#### Solution Two
+`TODO`
+
+

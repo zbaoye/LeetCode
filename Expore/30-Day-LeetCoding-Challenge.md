@@ -182,3 +182,31 @@ int lastStoneWeight(vector<int>& stones) {
     return q.empty()?0:q.top();
 }
 ```
+
+## Contiguous Array
+Given a binary array, find the maximum length of a contiguous subarray with equal number of 0 and 1.
+### Example
+```
+Input: [0,1,0]
+Output: 2
+Explanation: [0, 1] (or [1, 0]) is a longest contiguous subarray with equal number of 0 and 1.
+```
+### Code
+```cpp
+int findMaxLength(vector<int>& nums) {
+    unordered_map<int, int> m;
+    int sum = 0;
+    int ans = 0;
+    for(int i=0; i<nums.size(); i++){
+        sum += nums[i]?1:-1;
+        if(sum == 0){
+            ans = i+1;
+        }else if(m.count(sum)){
+            ans = max(ans,i-m[sum]);
+        }else{
+            m[sum] = i;
+        }
+    }
+    return ans;
+}
+```

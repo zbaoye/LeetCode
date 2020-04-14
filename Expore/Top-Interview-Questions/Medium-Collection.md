@@ -120,9 +120,14 @@ int lengthOfLongestSubstring(string s) {
 }
 ```
 
-##
+## Longest Palindromic Substring
+Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
 ### Example
-
+```
+Input: "babad"
+Output: "bab"
+Note: "aba" is also a valid answer.
+```
 ### Code
 Star
 #### Solution One
@@ -159,4 +164,26 @@ string longestPalindrome(string s) {
 #### Solution Two
 `TODO`
 
-
+## Increasing Triplet Subsequence
+Given an unsorted array return whether an increasing subsequence of length 3 exists or not in the array.
+Formally the function should:
+> Return true if there exists i, j, k
+> such that arr[i] < arr[j] < arr[k] given 0 ≤ i < j < k ≤ n-1 else return false.
+### Example
+```
+Input: [1,2,3,4,5]
+Output: true
+```
+### Code
+```cpp
+bool increasingTriplet(vector<int>& nums) {
+    int first = INT_MAX;
+    int second = INT_MAX;
+    for(int i:nums){
+        if(i<=first) first = i;
+        else if(i<=second) second = i;
+        else return true;
+    }
+    return false;
+}
+```

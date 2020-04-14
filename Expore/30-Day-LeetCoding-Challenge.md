@@ -210,3 +210,41 @@ int findMaxLength(vector<int>& nums) {
     return ans;
 }
 ```
+
+## Perform String Shifts
+You are given a string s containing lowercase English letters, and a matrix shift, where shift[i] = [direction, amount]:  
+- direction can be 0 (for left shift) or 1 (for right shift). 
+- amount is the amount by which string s is to be shifted.
+- A left shift by 1 means remove the first character of s and append it to the end.
+- Similarly, a right shift by 1 means remove the last character of s and add it to the beginning.
+Return the final string after all operations.
+### Example
+```
+Input: s = "abcdefg", shift = [[1,1],[1,1],[0,2],[1,3]]
+Output: "efgabcd"
+Explanation:  
+[1,1] means shift to right by 1. "abcdefg" -> "gabcdef"
+[1,1] means shift to right by 1. "gabcdef" -> "fgabcde"
+[0,2] means shift to left by 2. "fgabcde" -> "abcdefg"
+[1,3] means shift to right by 3. "abcdefg" -> "efgabcd"
+```
+### Code
+```cpp
+string stringShift(string s, vector<vector<int>>& shift) {
+    int operate = 0;
+    int len = s.length();
+    for(auto shift_1 : shift){
+        if(shift_1[0]==0){
+            operate -= shift_1[1];
+        }else{
+            operate += shift_1[1];
+        }
+    }
+    operate = operate%len;
+    if(operate < 0){
+        return s.substr(0-operate,len+operate) + s.substr(0,0-operate);
+    }else if(operate >0){
+        return s.substr(len-operate,operate) + s.substr(0,len-operate);
+    }else return s;
+}
+```

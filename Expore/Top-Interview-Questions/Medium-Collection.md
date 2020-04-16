@@ -216,3 +216,26 @@ ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
     return head;
 }
 ```
+
+## Odd Even Linked List
+Given a singly linked list, group all odd nodes together followed by the even nodes. Please note here we are talking about the node number and not the value in the nodes.
+### Example
+```
+Input: 2->1->3->5->6->4->7->NULL
+Output: 2->3->6->7->1->5->4->NULL
+```
+### Code
+```cpp
+ListNode* oddEvenList(ListNode* head) {
+    if (head == NULL) return head;
+    ListNode* odd = head; ListNode* even = odd->next; ListNode* even_head = even;
+    while(even != NULL && even->next != NULL){
+        odd -> next = even ->next;
+        odd = odd->next;
+        even -> next =odd ->next;
+        even = even ->next;
+    }
+    odd -> next = even_head;
+    return head;
+}
+```

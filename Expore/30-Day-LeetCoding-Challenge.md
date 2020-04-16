@@ -248,3 +248,38 @@ string stringShift(string s, vector<vector<int>>& shift) {
     }else return s;
 }
 ```
+
+## Valid Parenthesis String
+Given a string containing only three types of characters: '(', ')' and '*', write a function to check whether this string is valid. We define the validity of a string by these rules:  
+1. Any left parenthesis '(' must have a corresponding right parenthesis ')'.
+2. Any right parenthesis ')' must have a corresponding left parenthesis '('.
+3. Left parenthesis '(' must go before the corresponding right parenthesis ')'.
+4. '*' could be treated as a single right parenthesis ')' or a single left parenthesis '(' or an empty string.
+5. An empty string is also valid.
+### Example
+```
+Input: "(*))"
+Output: True
+```
+### Code
+```cpp
+bool checkValidString(string s) {
+    stack<int> left,star;
+    for(int i=0; i<s.size(); i++){
+        if(s[i] == '('){
+            left.push(i);
+        }else if(s[i] == '*'){
+            star.push(i);
+        }else{
+            if(left.empty() && star.empty()) return false;
+            else if(!left.empty()) left.pop();
+            else star.pop();
+        }
+    }
+    while(!left.empty() && !star.empty()){
+        if(left.top()>star.top()) return false;
+        left.pop();star.pop();
+    }
+    return left.empty();
+}
+```

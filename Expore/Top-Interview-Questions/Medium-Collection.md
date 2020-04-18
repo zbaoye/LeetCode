@@ -264,3 +264,36 @@ ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
     return a;
 }
 ```
+
+## Binary Tree Inorder Traversal
+Given a binary tree, return the inorder traversal of its nodes' values.
+### Example
+```
+Input: [1,null,2,3]
+   1
+    \
+     2
+    /
+   3
+
+Output: [1,3,2]
+```
+### Code
+```cpp
+vector<int> inorderTraversal(TreeNode* root) {
+    stack<TreeNode*> s;
+    vector<int> result;
+    TreeNode* cur =root;
+    while(cur != NULL || !s.empty()){
+        while(cur != NULL){
+            s.push(cur);
+            cur = cur->left;
+        }
+        cur = s.top();
+        s.pop();
+        result.push_back(cur->val);
+        cur = cur ->right;
+    }
+    return result;
+}
+```

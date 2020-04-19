@@ -297,3 +297,56 @@ vector<int> inorderTraversal(TreeNode* root) {
     return result;
 }
 ```
+
+## Binary Tree Zigzag Level Order Traversal
+Given a binary tree, return the zigzag level order traversal of its nodes' values. (ie, from left to right, then right to left for the next level and alternate between).
+### Example
+Given binary tree `[3,9,20,null,null,15,7]`,
+```
+    3
+   / \
+  9  20
+    /  \
+   15   7
+```
+return its zigzag level order traversal as:
+```
+[
+  [3],
+  [20,9],
+  [15,7]
+]
+```
+### Code
+```cpp
+vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+    vector<vector<int>> result;
+    if(root == NULL) return result;
+    deque<TreeNode*> q;
+    q.push_back(root);
+    bool zig = true;
+    TreeNode* node_temp;
+    while(!q.empty()){
+        int size_q = q.size();
+        vector<int> vec_temp;
+        while(size_q){
+            if(zig){
+                node_temp = q.front();
+                q.pop_front();
+                if(node_temp->left) q.push_back(node_temp->left);
+                if(node_temp->right) q.push_back(node_temp->right);
+            }else{
+                node_temp = q.back();
+                q.pop_back();
+                if(node_temp->right) q.push_front(node_temp->right);
+                if(node_temp->left) q.push_front(node_temp->left);
+            }
+            vec_temp.push_back(node_temp->val);
+            size_q--;
+        }
+        result.push_back(vec_temp);
+        zig = !zig;
+    }
+    return result;
+}
+```

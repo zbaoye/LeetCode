@@ -350,3 +350,29 @@ vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
     return result;
 }
 ```
+
+## Construct Binary Tree from Preorder and Inorder Traversal
+Given preorder and inorder traversal of a tree, construct the binary tree.
+### Example
+```
+preorder = [3,9,20,15,7]
+inorder = [9,3,15,20,7]
+```
+### Code
+```cpp
+TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+    if(preorder.empty()||inorder.empty()) return NULL;
+    return buildHelper(preorder, 0, preorder.size()-1, inorder, 0, inorder.size()-1);
+}
+
+TreeNode* buildHelper(vector<int>& preorder, int pFront, int pEnd, vector<int>& inorder, int iFront, int iEnd){
+    if(pFront>pEnd||iFront>iEnd) return NULL;
+    TreeNode* root = new TreeNode(preorder[pFront]);
+    int index=0;
+    while(preorder[pFront] != inorder[iFront+index]) index++;
+    
+    root -> left = buildHelper(preorder,pFront+1,pFront+index, inorder,iFront,iFront+index-1);
+    root -> right = buildHelper(preorder,pFront+index+1,pEnd, inorder,iFront+index+1,iEnd);
+    return root;
+}
+```

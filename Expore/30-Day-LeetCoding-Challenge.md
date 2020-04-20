@@ -386,3 +386,29 @@ int search(vector<int>& nums, int target) {
     return -1;
 }
 ```
+
+## Construct Binary Search Tree from Preorder Traversal
+Return the root node of a binary search tree that matches the given preorder traversal.
+### Example
+```
+Input: [8,5,1,7,10,12]
+Output: [8,5,10,1,7,null,12]
+```
+### Code
+```cpp
+TreeNode* bstFromPreorder(vector<int>& preorder) {
+    if(preorder.empty()) return NULL;
+    return build(preorder,0,preorder.size()-1);
+}
+TreeNode* build(vector<int>& preorder, int front, int end){
+    if (front>end) return NULL;
+    TreeNode* root = new TreeNode(preorder[front]);
+    int mid;
+    for(mid = front+1; mid<end+1; mid++){
+        if(preorder[front]<preorder[mid]) break;
+    }
+    root->left = build(preorder,front+1,mid-1);
+    root->right = build(preorder,mid,end);
+    return root;
+}
+```

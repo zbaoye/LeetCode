@@ -412,3 +412,25 @@ TreeNode* build(vector<int>& preorder, int front, int end){
     return root;
 }
 ```
+
+## Leftmost Column with at Least a One
+A binary matrix means that all elements are 0 or 1. For each individual row of the matrix, this row is sorted in non-decreasing order.  
+Given a row-sorted binary matrix binaryMatrix, return leftmost column index(0-indexed) with at least a 1 in it. If such index doesn't exist, return -1.
+### Example
+```
+Input: mat = [[0,0,0,1],[0,0,1,1],[0,1,1,1]]
+Output: 1
+```
+### Code
+```cpp
+int leftMostColumnWithOne(BinaryMatrix &binaryMatrix) {
+    vector<int> dim = binaryMatrix.dimensions();
+    int row=0,col=dim[1]-1;
+    while(row<dim[0]&&col>-1){
+        if (binaryMatrix.get(row,col) == 1){
+            col--;
+        }else row++;
+    }
+    return (col==dim[1]-1)?-1:col+1;
+}
+```

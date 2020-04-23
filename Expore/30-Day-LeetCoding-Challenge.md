@@ -434,3 +434,24 @@ int leftMostColumnWithOne(BinaryMatrix &binaryMatrix) {
     return (col==dim[1]-1)?-1:col+1;
 }
 ```
+
+## Subarray Sum Equals K
+Given an array of integers and an integer k, you need to find the total number of continuous subarrays whose sum equals to k.
+### Example
+```
+Input:nums = [1,1,1], k = 2
+Output: 2
+```
+### Code
+```cpp
+int subarraySum(vector<int>& nums, int k) {
+    unordered_map<int,int> m{{0,1}};
+    int res = 0, sum=0, n = nums.size();
+    for (auto num : nums){
+        sum += num;
+        res += m[sum-k];
+        ++m[sum];
+    }
+    return res;
+}
+```

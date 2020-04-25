@@ -532,3 +532,26 @@ public:
     }
 };
 ```
+
+## Jump Game
+Given an array of non-negative integers, you are initially positioned at the first index of the array.  
+Each element in the array represents your maximum jump length at that position.  
+Determine if you are able to reach the last index.
+### Example
+```
+Input: [3,2,1,0,4]
+Output: false
+Explanation: You will always arrive at index 3 no matter what. Its maximum
+             jump length is 0, which makes it impossible to reach the last index.
+```
+### Code
+```cpp
+bool canJump(vector<int>& nums) {
+    int n = nums.size(),reach = 0;
+    for(int i =0; i<n; i++){
+        if(i > reach || reach >= n-1) break;
+        reach = max(reach,i+nums[i]);
+    }
+    return reach >= n-1;
+}
+```

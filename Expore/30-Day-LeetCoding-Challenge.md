@@ -614,5 +614,61 @@ int maximalSquare(vector<vector<char>>& matrix) {
     }
     return res*res;
 }
+```
 
+## First Unique Number
+You have a queue of integers, you need to retrieve the first unique integer in the queue.  
+Implement the FirstUnique class:  
+- FirstUnique(int[] nums) Initializes the object with the numbers in the queue.
+- int showFirstUnique() returns the value of the first unique integer of the queue, and returns -1 if there is no such integer.
+- void add(int value) insert value to the queue.
+### Example
+```
+Input: 
+["FirstUnique","showFirstUnique","add","showFirstUnique","add","showFirstUnique","add","showFirstUnique"]
+[[[2,3,5]],[],[5],[],[2],[],[3],[]]
+Output: 
+[null,2,null,2,null,3,null,-1]
+
+Explanation: 
+FirstUnique firstUnique = new FirstUnique([2,3,5]);
+firstUnique.showFirstUnique(); // return 2
+firstUnique.add(5);            // the queue is now [2,3,5,5]
+firstUnique.showFirstUnique(); // return 2
+firstUnique.add(2);            // the queue is now [2,3,5,5,2]
+firstUnique.showFirstUnique(); // return 3
+firstUnique.add(3);            // the queue is now [2,3,5,5,2,3]
+firstUnique.showFirstUnique(); // return -1
+```
+### Code
+```cpp
+class FirstUnique {
+private:
+    unordered_map<int,list<int>::iterator> hash_;
+    unordered_map<int,int> count_;
+    list<int> ls_;
+public:
+    FirstUnique(vector<int>& nums) {
+        for(int num : nums){
+            add(num);
+        }
+    }
+    int showFirstUnique() {
+        if(ls_.empty()){
+            return -1;
+        }else{
+            return ls_.front();
+        }
+    }
+    void add(int value) {
+        if(hash_.find(value) == hash_.end()){
+            list<int>::iterator it = ls_.insert(ls_.end(),value);
+            hash_[value]=it;
+            count_[value] = 0;
+        }else if(count_[value] == 0){
+            ls_.erase(hash_[value]);
+            count_[value] = 1;
+        }
+    }
+};
 ```

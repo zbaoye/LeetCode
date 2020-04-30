@@ -672,3 +672,66 @@ public:
     }
 };
 ```
+
+## Binary Tree Maximum Path Sum
+Given a non-empty binary tree, find the maximum path sum.  
+For this problem, a path is defined as any sequence of nodes from some starting node to any node in the tree along the parent-child connections. The path must contain at least one node and does not need to go through the root.
+### Example
+```
+Input: [-10,9,20,null,null,15,7]
+
+   -10
+   / \
+  9  20
+    /  \
+   15   7
+
+Output: 42
+```
+### Code
+```cpp
+    int helper(TreeNode* root, int &maxSum){
+        if(root == NULL) return 0;
+        int left = 0, right =0;
+        if(root->left) left = helper(root->left,maxSum);
+        if(root->right) right = helper(root->right,maxSum);
+        int leftOrRight = max(root->val, root->val+max(left,right));
+        maxSum = max(maxSum,max(left+right+root->val, leftOrRight));
+        return leftOrRight;
+        
+    }
+    int maxPathSum(TreeNode* root) {
+        int maxSum = INT_MIN;
+        helper(root, maxSum);
+        return maxSum;
+    }
+```
+
+
+## Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree
+Given a binary tree where each path going from the root to any leaf form a valid sequence, check if a given string is a valid sequence in such binary tree.   
+We get the given string from the concatenation of an array of integers arr and the concatenation of all values of the nodes along a path results in a sequence in the given binary tree.
+### Example
+```
+Input: root = [0,1,0,0,1,0,null,null,1,0,0], arr = [0,1,0,1]
+Output: true
+Explanation: 
+The path 0 -> 1 -> 0 -> 1 is a valid sequence (green color in the figure). 
+Other valid sequences are: 
+0 -> 1 -> 1 -> 0 
+0 -> 0 -> 0
+```
+### Code
+```cpp
+bool helper(TreeNode* root, vector<int>& arr, int index){
+    if(root==NULL) return false;
+    if(arr[index] != root->val) return false;
+    if(index==arr.size()-1){
+        return root->left==NULL && root->right==NULL;
+    }
+    return helper(root->left, arr, index+1) || helper(root->right, arr, index+1);
+}
+bool isValidSequence(TreeNode* root, vector<int>& arr) {
+    return helper(root,arr,0);
+}
+```
